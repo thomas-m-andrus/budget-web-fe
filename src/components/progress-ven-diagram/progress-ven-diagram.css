@@ -1,21 +1,12 @@
 .progress-ven-diagram {
     --first-circle-color: blue;
     --second-circle-color: red;
-    --size: 8rem;
-}
-
-.progress-ven-diagram__circle {
-  height: var(--size);
-  width: var(--size);
-  border-radius: 50%;
-  display: inline-block;
-  opacity: 0.5;
 }
 
 .progress-ven-diagram__circle--first {
-  background-color: var(--first-circle-color);
+  /* background-color: var(--first-circle-color); */
 }
 
 .progress-ven-diagram__circle--second {
-  background-color: var(--second-circle-color);
+  /* background-color: var(--second-circle-color); */
 }
