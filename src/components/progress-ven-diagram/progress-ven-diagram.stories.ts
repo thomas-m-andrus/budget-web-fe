@@ -4,7 +4,7 @@ import { ProgressVenDiagram } from '.';
 
 const meta = {
   title: "Snapshot/ProgressVenDiagram",
-  component: ProgressVenDiagram
+  component: ProgressVenDiagram,
 } satisfies Meta<typeof ProgressVenDiagram>;
 
 export default meta;

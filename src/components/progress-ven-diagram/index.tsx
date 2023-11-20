@@ -3,7 +3,6 @@ import "./progress-ven-diagram.css";
 import { Circle, size } from "../circle";
 import { ProgressVenDiagramProps as Props } from "./model";
 import {
-  convertToDays,
   calcPercentageOfMoneyLeft,
   calcDayDifference,
 } from "./utils";
@@ -21,33 +20,37 @@ export const ProgressVenDiagram = ({
   const percentageOfMoneyLeft = calcPercentageOfMoneyLeft(paycheck, expenses);
   const moneyPercentageLarger =
     percentageOfMoneyLeft - percentageOfDaysLeft >= 0;
+  const moneyColor = 'green';
+  const timeRemainingColor = moneyPercentageLarger ? 'limeGreen' : 'red';
 
   return (
     <div className="progress-ven-diagram">
       {[
         {
           circle: "first",
-          color: moneyPercentageLarger ? "green" : "red",
-          circleSize: moneyPercentageLarger
-            ? `${size}rem`
-            : `${percentageOfMoneyLeft * size}rem`,
+          color: moneyColor,
+          circleSize: `${size}rem`,
           position: "",
+          percent: percentageOfMoneyLeft,
+          z: moneyPercentageLarger ? 0 : 1,
         },
         {
           circle: "second",
-          color: "red",
-          circleSize: !moneyPercentageLarger
-            ? `${size}rem`
-            : `${percentageOfDaysLeft * size}rem`,
+          color: timeRemainingColor,
+          circleSize: `${size}rem`,
+          percent: percentageOfDaysLeft,
+          z: moneyPercentageLarger ? 1 : 0,
         },
-      ].map(({ circle, color, circleSize }) => (
+      ].map(({ circle, color, circleSize, percent, z }) => (
         <Circle
           className={`progress-ven-diagram__circle progress-ven-diagram__circle--${circle}`}
           color={color}
           size={circleSize}
+          percentage={percent * 100}
+          z={z}
         />
       ))}
-      <div>{`${daysLeft}/${totalDays} = ${percentageOfDaysLeft}% days left`}</div>
+      
     </div>
   );
 };
