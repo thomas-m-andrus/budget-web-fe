@@ -25,3 +25,13 @@ export const Primary: Story = {
     paycheck: 664
   },
 };
+
+export const Secondary: Story = {
+  args: {
+    currentDate: today,
+    dateOfNextPaycheck: dateOfNextPaycheck,
+    startDate: startOfPayPeriod,
+    expenses: 400,
+    paycheck: 664,
+  },
+};
