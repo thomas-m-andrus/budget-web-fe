@@ -43,6 +43,7 @@ export const ProgressVenDiagram = ({
         },
       ].map(({ circle, color, circleSize, percent, z }) => (
         <Circle
+          key={`${circle}_circle-key`}
           className={`progress-ven-diagram__circle progress-ven-diagram__circle--${circle}`}
           color={color}
           size={circleSize}

@@ -1,10 +1,23 @@
+import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { ProgressVenDiagram } from ".";
 
+const convertToDate = (input:Date | number) => typeof input === 'number' ? new Date(input) : input;
+
 const meta = {
   title: "Snapshot/ProgressVenDiagram",
   component: ProgressVenDiagram,
+  render: ({ currentDate, dateOfNextPaycheck, startDate, ...args }) => {
+    return (
+      <ProgressVenDiagram
+        currentDate={convertToDate(currentDate)}
+        dateOfNextPaycheck={convertToDate(dateOfNextPaycheck)}
+        startDate={convertToDate(startDate)}
+        {...args}
+      />
+    );
+  },
   argTypes: {
     currentDate: { control: "date" },
     dateOfNextPaycheck: { control: "date" },
