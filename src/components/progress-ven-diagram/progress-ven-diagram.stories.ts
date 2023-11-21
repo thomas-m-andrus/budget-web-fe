@@ -1,10 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { ProgressVenDiagram } from '.';
+import { ProgressVenDiagram } from ".";
 
 const meta = {
   title: "Snapshot/ProgressVenDiagram",
   component: ProgressVenDiagram,
+  argTypes: {
+    currentDate: { control: "date" },
+    dateOfNextPaycheck: { control: "date" },
+    startDate: { control: "date" },
+  },
 } satisfies Meta<typeof ProgressVenDiagram>;
 
 export default meta;
@@ -22,7 +27,7 @@ export const Primary: Story = {
     dateOfNextPaycheck: dateOfNextPaycheck,
     startDate: startOfPayPeriod,
     expenses: 200,
-    paycheck: 664
+    paycheck: 664,
   },
 };
 
