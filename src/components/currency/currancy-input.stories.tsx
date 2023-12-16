@@ -19,7 +19,7 @@ const StoryComponent = () => {
 }
 
 const meta = {
-  title: "blocks/CurrancyInput",
+  title: "blocks/CurrencyInput",
   component: StoryComponent,
 } satisfies Meta<typeof StoryComponent>;
 

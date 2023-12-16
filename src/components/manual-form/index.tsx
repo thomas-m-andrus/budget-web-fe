@@ -5,17 +5,10 @@ import React, {
   useState,
   useCallback,
 } from "react";
-import { InputType, Props, State } from "./model";
-import { CurrencyInput } from "../currancy-input";
-import { reducer } from "./utils";
+import { InputType, Props } from "./model";
+import { CurrencyInput } from "../currency";
+import { convertToSubmit, initial, reducer } from "./utils";
 import styles from "./index.module.css";
-
-const initial: State = {
-  dateOfNextPaycheck: "",
-  startDate: "",
-  expenses: 0,
-  paycheck: 0,
-};
 
 export const ManualForm = ({ submit }: Props) => {
   const [form, dispatch] = useReducer(reducer, initial);
@@ -29,20 +22,14 @@ export const ManualForm = ({ submit }: Props) => {
       dispatch({ type, value: event.target.value });
   const onSubmit = useCallback(
     (e: FormEvent) => {
-      console.log("I'm being pushed");
       e.preventDefault();
       setAttemptedSubmit(true);
-      const { expenses, paycheck, dateOfNextPaycheck, startDate } = form;
+      const { dateOfNextPaycheck, startDate } = form;
       const bothDatesSelected = [startDate, dateOfNextPaycheck].every((v) =>
         /\d{4}(-\d{2}){2}/.test(v)
       );
       if (bothDatesSelected) {
-        submit({
-          expenses: expenses/100,
-          paycheck: paycheck/100,
-          dateOfNextPaycheck: new Date(dateOfNextPaycheck),
-          startDate: new Date(startDate),
-        });
+        submit(convertToSubmit(form));
       }
     },
     [form, submit]
