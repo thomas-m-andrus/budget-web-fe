@@ -1,0 +1,22 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    min-width: 80%;
+    @media (min-width:480px) {
+        min-width: 20rem;
+    }
+}
+
+.button {
+    max-width: 5rem;
+}
+
+.warning {
+    color: red;
+    text-align: right;
+}
+
+.inputGroup {
+    display: flex;
+    justify-content: space-between;
+}
