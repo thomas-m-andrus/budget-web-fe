@@ -1,4 +1,4 @@
-import React, { useState, useRef, ChangeEvent } from "react";
+import React, { ChangeEvent } from "react";
 
 interface CurrencyInputProps {
   value: number;
