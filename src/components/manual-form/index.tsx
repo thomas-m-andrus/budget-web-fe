@@ -34,44 +34,43 @@ export const ManualForm = ({ submit }: Props) => {
     },
     [form, submit]
   );
+  const moneyInputs: [string, InputType.PAYCHECK | InputType.EXPENSES][] = [
+    ["Paycheck", InputType.PAYCHECK],
+    ["Expenses", InputType.EXPENSES],
+  ];
+  const dateInputs: [
+    string,
+    InputType.DATE_OF_NEXT_PAYCHECK | InputType.START_DATE
+  ][] = [
+    ["Start", InputType.START_DATE],
+    ["Next Paycheck", InputType.DATE_OF_NEXT_PAYCHECK],
+  ];
   return (
     <form onSubmit={onSubmit} className={styles.form}>
-      <label>
-        Paycheck:
-        <CurrencyInput
-          value={form.paycheck as number}
-          onChange={setMoney(InputType.PAYCHECK)}
-        ></CurrencyInput>
-      </label>
-      <label>
-        Expenses:
-        <CurrencyInput
-          value={form.expenses as number}
-          onChange={setMoney(InputType.EXPENSES)}
-        ></CurrencyInput>
-      </label>
-      <label>
-        Start:
-        <input
-          type="date"
-          value={form.startDate}
-          onChange={setDate(InputType.START_DATE)}
-        ></input>
-      </label>
-      {attemptedSubmit && form.startDate === "" && (
-        <div className={styles.warning}>Please select a date!</div>
-      )}
-      <label>
-        Next Paycheck:
-        <input
-          type="date"
-          value={form[InputType.DATE_OF_NEXT_PAYCHECK]}
-          onChange={setDate(InputType.DATE_OF_NEXT_PAYCHECK)}
-        ></input>
-      </label>
-      {attemptedSubmit && form[InputType.DATE_OF_NEXT_PAYCHECK] === "" && (
-        <div className={styles.warning}>Please select a date!</div>
-      )}
+      {moneyInputs.map(([label, type]) => (
+        <label className={styles.inputGroup}>
+          {label}:
+          <CurrencyInput
+            value={form[type] as number}
+            onChange={setMoney(type as InputType.PAYCHECK | InputType.EXPENSES)}
+          ></CurrencyInput>
+        </label>
+      ))}
+      {dateInputs.map(([label, type]) => (
+        <>
+          <label className={styles.inputGroup}>
+            {label}:
+            <input
+              type="date"
+              value={form[type]}
+              onChange={setDate(type)}
+            ></input>
+          </label>
+          {attemptedSubmit && form[type] === "" && (
+            <div className={styles.warning}>Please select a date!</div>
+          )}
+        </>
+      ))}
       <button className={styles.button}>Submit</button>
     </form>
   );
